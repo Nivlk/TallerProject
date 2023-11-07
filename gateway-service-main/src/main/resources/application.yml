@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: SecurityApplication
+          uri: jdbc:postgresql://taller.postgres.database.azure.com:5432/jwt_security/api/v1/users
+          predicates:
+            - Path=/api/v1/users/**
+            - Header=Authorization, Bearer.*
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
